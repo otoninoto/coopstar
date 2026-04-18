@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { CheckCircle2, TrendingUp, Users, Clock } from "lucide-react";
+import { CheckCircle2, TrendingUp, Users, Clock, Award } from "lucide-react";
 
 const stats = [
   { value: "9+", label: "Anos no mercado", icon: TrendingUp },
@@ -33,127 +33,108 @@ export default function About() {
       aria-labelledby="about-heading"
       className="py-24 md:py-32 bg-slate-950 relative overflow-hidden"
     >
-      {/* Decorative element */}
-      <div
-        className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500/50 to-transparent"
-        aria-hidden="true"
-      />
-      <div
-        className="absolute -top-40 right-0 w-80 h-80 bg-blue-600/5 rounded-full blur-3xl pointer-events-none"
-        aria-hidden="true"
-      />
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           ref={ref}
           variants={containerVariants}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          className="grid lg:grid-cols-2 gap-16 items-center"
+          className="grid lg:grid-cols-2 gap-20 items-center"
         >
+          {/* Visual Elements with Image */}
+          <motion.div variants={itemVariants} className="relative group">
+            <div className="absolute -inset-4 bg-gradient-to-r from-blue-500/20 to-amber-500/20 rounded-3xl blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
+            
+            <div className="relative glass-card rounded-3xl overflow-hidden border-white/10 aspect-square md:aspect-video lg:aspect-square">
+               <img 
+                src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=2084&auto=format&fit=crop" 
+                alt="Equipe Coopstar Express em escritório moderno" 
+                className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+               />
+               <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
+               
+               {/* Floating Badge */}
+               <div className="absolute bottom-6 left-6 right-6 p-6 glass-card border-white/20 flex items-center gap-4">
+                  <div className="w-12 h-12 bg-amber-500 rounded-full flex items-center justify-center text-slate-900 shadow-lg shadow-amber-500/20">
+                    <Award size={24} />
+                  </div>
+                  <div>
+                    <p className="text-white font-bold">Referência em SP</p>
+                    <p className="text-slate-400 text-xs uppercase tracking-widest font-bold">Qualidade Certificada</p>
+                  </div>
+               </div>
+            </div>
+
+            {/* Experience Stats Card Overlay */}
+            <motion.div 
+               animate={{ y: [0, -10, 0] }}
+               transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+               className="absolute -top-10 -right-6 hidden xl:flex glass-card p-6 border-blue-500/30 shadow-2xl items-center gap-5"
+            >
+               <div className="text-right">
+                  <p className="text-3xl font-black text-white">99.8%</p>
+                  <p className="text-[10px] font-bold text-slate-400 uppercase">Entregas no Prazo</p>
+               </div>
+               <div className="w-px h-10 bg-white/10"></div>
+               <TrendingUp className="text-emerald-400" size={32} />
+            </motion.div>
+          </motion.div>
+
           {/* Text content */}
           <div>
-            <motion.p
-              variants={itemVariants}
-              className="text-amber-400 font-semibold text-sm uppercase tracking-widest mb-4"
-            >
-              Quem Somos
-            </motion.p>
+            <motion.div variants={itemVariants} className="flex items-center gap-3 mb-4">
+              <span className="w-12 h-[2px] bg-amber-500"></span>
+              <p className="text-amber-500 font-bold text-sm uppercase tracking-widest">
+                Compromisso & Qualidade
+              </p>
+            </motion.div>
 
             <motion.h2
               id="about-heading"
               variants={itemVariants}
-              className="section-title leading-tight"
+              className="section-title leading-tight mb-8"
             >
-              Mais de 9 anos levando agilidade{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">
-                para o seu negócio
+              Mais de 9 anos conectando <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-amber-400">
+                Pessoas e Empresas.
               </span>
             </motion.h2>
 
             <motion.p
               variants={itemVariants}
-              className="mt-6 text-slate-400 leading-relaxed text-base md:text-lg"
+              className="text-slate-400 leading-relaxed text-base md:text-lg mb-6"
             >
-              A Coopstar Express é especializada no serviço de entregas e coletas
-              em São Paulo. Com uma equipe treinada e comprometida, nos tornamos
-              uma empresa referência no segmento — agilizando os mais diversos
-              processos logísticos dos nossos clientes.
+              A **Coopstar Express** nasceu da necessidade de um serviço logístico que entendesse o ritmo frenético de São Paulo. Não somos apenas motoboys; somos a extensão do seu negócio nas ruas.
             </motion.p>
 
             <motion.p
               variants={itemVariants}
-              className="mt-4 text-slate-400 leading-relaxed text-base md:text-lg"
+              className="text-slate-400 leading-relaxed text-base md:text-lg mb-10"
             >
-              Atendemos São Paulo Capital e Grande SP com dedicação absoluta.
-              Funcionamos{" "}
-              <strong className="text-white">24 horas, de segunda a
-              segunda</strong>, com agendamento com hora marcada. Faça seu
-              cadastro e garanta um parceiro logístico de confiança.
+              Nossa operação roda **24 horas**, com uma frota monitorada e profissionais treinados para lidar desde documentos confidenciais até logística reversa complexa.
             </motion.p>
 
-            <motion.div variants={itemVariants} className="mt-8">
-              <ul className="space-y-3">
-                {[
-                  "Equipe especializada e treinada",
-                  "Atendimento personalizado para cada cliente",
-                  "Serviços bancários, cartoriais e de aeroporto",
-                  "Cadastro rápido e sem burocracia",
-                ].map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-slate-300">
-                    <CheckCircle2
-                      className="w-5 h-5 text-amber-400 mt-0.5 shrink-0"
-                      aria-hidden="true"
-                    />
-                    {item}
-                  </li>
-                ))}
-              </ul>
+            <motion.div variants={itemVariants} className="grid grid-cols-2 gap-8 mb-12">
+               {stats.slice(0, 4).map(({ value, label, icon: Icon }) => (
+                  <div key={label} className="flex gap-4">
+                    <Icon className="text-amber-500 shrink-0" size={24} />
+                    <div>
+                      <h4 className="text-white font-bold text-lg">{value}</h4>
+                      <p className="text-slate-500 text-xs font-medium">{label}</p>
+                    </div>
+                  </div>
+               ))}
             </motion.div>
 
-            <motion.div variants={itemVariants} className="mt-10">
+            <motion.div variants={itemVariants}>
               <a
-                id="about-cta"
                 href="#contato"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document
-                    .querySelector("#contato")
-                    ?.scrollIntoView({ behavior: "smooth" });
-                }}
                 className="btn-primary"
               >
-                Faça seu Cadastro
+                Conheça Nossa Estrutura
               </a>
             </motion.div>
           </div>
-
-          {/* Stats grid */}
-          <motion.div
-            variants={containerVariants}
-            className="grid grid-cols-2 gap-4"
-          >
-            {stats.map(({ value, label, icon: Icon }) => (
-              <motion.div
-                key={label}
-                variants={itemVariants}
-                className="glass-card p-6 md:p-8 group hover:border-blue-500/30 transition-all duration-300 service-card"
-              >
-                <div className="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center mb-4 group-hover:bg-blue-500/20 transition-colors duration-300">
-                  <Icon
-                    className="w-6 h-6 text-blue-400"
-                    aria-hidden="true"
-                  />
-                </div>
-                <p className="text-4xl font-extrabold text-white tabular-nums">
-                  {value}
-                </p>
-                <p className="mt-1 text-sm text-slate-400 font-medium">
-                  {label}
-                </p>
-              </motion.div>
-            ))}
-          </motion.div>
         </motion.div>
       </div>
     </section>

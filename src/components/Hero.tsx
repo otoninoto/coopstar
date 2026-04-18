@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Clock, MapPin, Shield } from "lucide-react";
+import { ArrowRight, Clock, MapPin, Shield, Search, PackageCheck } from "lucide-react";
+import { useState } from "react";
 
 const badges = [
   { icon: Clock, text: "24h por dia, 7 dias" },
@@ -10,9 +11,22 @@ const badges = [
 ];
 
 export default function Hero() {
+  const [trackingCode, setTrackingCode] = useState("");
+  const [isSearching, setIsSearching] = useState(false);
+
   const handleScroll = (href: string) => {
     const el = document.querySelector(href);
     if (el) el.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const simulateTracking = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!trackingCode) return;
+    setIsSearching(true);
+    setTimeout(() => {
+      setIsSearching(false);
+      alert("Simulação: Encomenda em rota de entrega!");
+    }, 1500);
   };
 
   return (
@@ -21,25 +35,24 @@ export default function Hero() {
       aria-labelledby="hero-heading"
       className="relative min-h-screen flex items-center justify-center overflow-hidden hero-gradient"
     >
-      {/* Grid pattern background */}
-      <div className="absolute inset-0 grid-pattern opacity-40" aria-hidden="true" />
+      {/* Background Image with Overlay */}
+      <div className="absolute inset-0 z-0">
+        <img 
+          src="https://images.unsplash.com/photo-1558981403-c5f91cbba527?q=80&w=2070&auto=format&fit=crop" 
+          alt="Moto em alta velocidade em São Paulo" 
+          className="w-full h-full object-cover opacity-20 grayscale brightness-50"
+        />
+        <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-[2px]"></div>
+      </div>
 
-      {/* Floating orbs */}
-      <div
-        className="absolute top-1/4 left-1/4 w-72 h-72 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"
-        aria-hidden="true"
-      />
-      <div
-        className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-amber-500/8 rounded-full blur-3xl pointer-events-none"
-        aria-hidden="true"
-      />
+      <div className="absolute inset-0 grid-pattern opacity-40 z-0" aria-hidden="true" />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 md:py-40">
-        <div className="max-w-4xl mx-auto text-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 md:py-40 grid lg:grid-cols-2 gap-12 items-center">
+        <div className="text-left">
           {/* Eyebrow */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-sm font-semibold mb-6"
           >
@@ -47,7 +60,7 @@ export default function Hero() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500" />
             </span>
-            Disponível agora · São Paulo
+            Operação 24h Disponível em São Paulo
           </motion.div>
 
           {/* Heading */}
@@ -56,29 +69,22 @@ export default function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-white leading-[1.05] tracking-tight"
+            className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-white leading-tight tracking-tight"
           >
-            Entregas que{" "}
+            Logística Inteligente{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">
-              não param
-            </span>{" "}
-            <br className="hidden sm:block" />
-            enquanto o seu{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">
-              negócio cresce
+              sobre duas rodas
             </span>
           </motion.h1>
 
-          {/* Subtitle */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="mt-6 text-lg sm:text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed"
+            className="mt-6 text-lg sm:text-xl text-slate-300 max-w-xl leading-relaxed"
           >
-            A Coopstar Express é especialista em motoboy, moto frete e delivery
-            em São Paulo há mais de 9 anos. Agilidade e confiança para a sua
-            empresa — 24 horas, todos os dias.
+            A Coopstar Express é sua parceira estratégica para entregas ultra-rápidas, 
+            e-commerce e serviços bancários. Agilidade real com a experiência de quem conhece SP.
           </motion.p>
 
           {/* CTA Buttons */}
@@ -86,70 +92,106 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="mt-10 flex flex-col sm:flex-row gap-4 justify-center"
+            className="mt-10 flex flex-col sm:flex-row gap-4"
           >
             <a
-              id="hero-cta-primary"
               href="#contato"
-              onClick={(e) => {
-                e.preventDefault();
-                handleScroll("#contato");
-              }}
-              className="btn-primary text-base relative"
+              onClick={(e) => { e.preventDefault(); handleScroll("#contato"); }}
+              className="btn-primary text-base"
             >
-              Solicitar Motoboy Agora
+              Solicitar Motoboy
               <ArrowRight className="w-5 h-5" aria-hidden="true" />
             </a>
             <a
-              id="hero-cta-secondary"
               href="#servicos"
-              onClick={(e) => {
-                e.preventDefault();
-                handleScroll("#servicos");
-              }}
+              onClick={(e) => { e.preventDefault(); handleScroll("#servicos"); }}
               className="btn-outline text-base"
             >
-              Ver Nossos Serviços
+              Serviços Corporativos
             </a>
-          </motion.div>
-
-          {/* Trust badges */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="mt-14 flex flex-wrap justify-center gap-4"
-          >
-            {badges.map(({ icon: Icon, text }) => (
-              <div
-                key={text}
-                className="flex items-center gap-2.5 px-5 py-2.5 glass-card text-slate-300 text-sm font-medium"
-              >
-                <Icon className="w-4 h-4 text-amber-400 shrink-0" aria-hidden="true" />
-                {text}
-              </div>
-            ))}
           </motion.div>
         </div>
 
-        {/* Scroll indicator */}
+        {/* Tracking Utility Card */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2, duration: 0.5 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-slate-500 text-xs"
-          aria-hidden="true"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="glass-card p-8 border-white/20 shadow-2xl relative overflow-hidden group"
         >
-          <span>Role para baixo</span>
-          <motion.div
-            animate={{ y: [0, 6, 0] }}
-            transition={{ repeat: Infinity, duration: 1.5 }}
-            className="w-5 h-8 border-2 border-slate-600 rounded-full flex justify-center pt-1.5"
-          >
-            <div className="w-1 h-2 bg-amber-400 rounded-full" />
-          </motion.div>
+           <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:rotate-12 transition-transform">
+              <PackageCheck size={80} className="text-amber-400" />
+           </div>
+           
+           <h3 className="text-2xl font-bold text-white mb-2 flex items-center gap-2">
+             <Search size={24} className="text-amber-400" />
+             Rastreio Rápido
+           </h3>
+           <p className="text-slate-400 mb-6 text-sm">
+             Acompanhe sua entrega em tempo real inserindo o código do seu pedido abaixo.
+           </p>
+
+           <form onSubmit={simulateTracking} className="space-y-4">
+              <div className="relative">
+                <input 
+                  type="text" 
+                  placeholder="Ex: CP-123456"
+                  value={trackingCode}
+                  onChange={(e) => setTrackingCode(e.target.value.toUpperCase())}
+                  className="w-full bg-slate-900/50 border border-white/10 rounded-xl px-5 py-4 text-white focus:border-amber-500/50 outline-none transition-all"
+                />
+              </div>
+              <button 
+                type="submit"
+                disabled={isSearching}
+                className="w-full bg-white/10 hover:bg-white/15 border border-white/10 text-white font-bold py-4 rounded-xl transition-all flex items-center justify-center gap-2 group"
+              >
+                {isSearching ? (
+                  <motion.div 
+                    animate={{ rotate: 360 }} 
+                    transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
+                  >
+                    <Search size={20} />
+                  </motion.div>
+                ) : (
+                  <>Consultar Status <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" /></>
+                )}
+              </button>
+           </form>
+
+           <div className="mt-8 pt-8 border-t border-white/5 flex items-center justify-between">
+              <div>
+                <p className="text-slate-500 text-xs uppercase font-bold tracking-tighter">Status Geral SP</p>
+                <div className="flex items-center gap-2 mt-1">
+                  <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+                  <span className="text-white text-sm font-semibold">Fluxo Normal</span>
+                </div>
+              </div>
+              <div>
+                <p className="text-slate-500 text-xs uppercase font-bold tracking-tighter text-right">Média Transito</p>
+                <p className="text-white text-sm font-semibold text-right">Pequeno (+8min)</p>
+              </div>
+           </div>
         </motion.div>
       </div>
+
+      {/* Trust badges */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.5 }}
+        className="absolute bottom-12 left-0 right-0 flex flex-wrap justify-center gap-4 px-4"
+      >
+        {badges.map(({ icon: Icon, text }) => (
+          <div
+            key={text}
+            className="flex items-center gap-2.5 px-6 py-3 glass-card text-slate-300 text-sm font-medium border-white/5"
+          >
+            <Icon className="w-4 h-4 text-amber-500 shrink-0" aria-hidden="true" />
+            {text}
+          </div>
+        ))}
+      </motion.div>
     </section>
   );
 }

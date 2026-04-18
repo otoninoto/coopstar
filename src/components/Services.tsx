@@ -18,75 +18,27 @@ const services = [
     icon: Zap,
     title: "Moto Frete Expresso",
     description:
-      "Entregas rápidas de documentos e pequenos volumes por toda a cidade. Rapidez e segurança garantidas em cada corrida.",
-    highlight: "Mais popular",
-    color: "amber",
+      "Documentos e pequenos volumes entregues com prioridade máxima. Ideal para cartórios e urgências.",
+    highlight: "Mais pedido",
+    img: "https://images.unsplash.com/photo-1619441163451-309193158f33?q=80&w=2072&auto=format&fit=crop",
   },
   {
     id: "delivery",
     icon: ShoppingBag,
-    title: "Delivery para Empresas",
+    title: "Delivery E-commerce",
     description:
-      "Seu negócio tem grande volume de pedidos? Implantamos um sistema de delivery completo com o melhor custo-benefício para Farmácias, Pizzarias, Restaurantes e Auto Peças.",
-    highlight: null,
-    color: "blue",
+      "Sua loja online com entrega no mesmo dia. Logística preparada para grandes volumes diários.",
+    img: "https://images.unsplash.com/photo-1595246140625-573b715d11dc?q=80&w=2070&auto=format&fit=crop",
   },
   {
     id: "servicos-banc",
     icon: Building2,
-    title: "Serviços Bancários e Cartoriais",
+    title: "Serviços Bancários",
     description:
-      "Motoboy dedicado para depósitos, retiradas, reconhecimento de firma, protocolos e outros serviços bancários ou cartoriais com agilidade.",
-    highlight: null,
-    color: "blue",
-  },
-  {
-    id: "aeroporto",
-    icon: Plane,
-    title: "Retiradas em Aeroporto",
-    description:
-      "Coleta e entrega de encomendas e documentos diretamente nos aeroportos de São Paulo, com pontualidade e rastreamento.",
-    highlight: null,
-    color: "blue",
-  },
-  {
-    id: "fora-capital",
-    icon: MapPin,
-    title: "Fora da Capital",
-    description:
-      "Serviços especializados para cidades da Grande São Paulo. Consulte nossa tabela de preços para regiões além da capital.",
-    highlight: null,
-    color: "blue",
-  },
-  {
-    id: "coleta",
-    icon: Package,
-    title: "Coletas Programadas",
-    description:
-      "Agende coletas recorrentes para sua empresa e otimize o processo logístico com horários definidos e compromisso garantido.",
-    highlight: null,
-    color: "blue",
+      "Confiança total para pagamentos, depósitos e protocolos em toda a rede bancária de SP.",
+    img: "https://images.unsplash.com/photo-1556742049-3ad74acb99de?q=80&w=1974&auto=format&fit=crop",
   },
 ];
-
-const colorMap = {
-  amber: {
-    icon: "text-amber-400",
-    bg: "bg-amber-500/10",
-    border: "border-amber-500/20",
-    hoverBorder: "hover:border-amber-500/40",
-    badge: "bg-amber-500/20 text-amber-300 border border-amber-500/30",
-    arrow: "text-amber-400",
-  },
-  blue: {
-    icon: "text-blue-400",
-    bg: "bg-blue-500/10",
-    border: "border-blue-500/20",
-    hoverBorder: "hover:border-blue-500/40",
-    badge: "",
-    arrow: "text-blue-400",
-  },
-};
 
 export default function Services() {
   const ref = useRef(null);
@@ -95,111 +47,62 @@ export default function Services() {
   return (
     <section
       id="servicos"
-      aria-labelledby="services-heading"
-      className="py-24 md:py-32 relative overflow-hidden"
-      style={{ background: "linear-gradient(180deg, #0D1B2A 0%, #0a1520 100%)" }}
+      className="py-24 bg-slate-950 relative overflow-hidden"
     >
-      <div
-        className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-500/40 to-transparent"
-        aria-hidden="true"
-      />
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <p className="text-amber-400 font-semibold text-sm uppercase tracking-widest mb-4">
-            O Que Oferecemos
-          </p>
-          <h2 id="services-heading" className="section-title">
-            Soluções de entrega para{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">
-              cada necessidade
-            </span>
-          </h2>
-          <p className="section-subtitle mx-auto mt-4">
-            Do documento urgente à rota diária de delivery — cuidamos de toda a
-            sua logística enquanto você foca no que importa.
-          </p>
-        </motion.div>
+        <div className="text-center mb-20">
+          <p className="text-amber-500 font-bold text-sm uppercase tracking-widest mb-4">Especialidades</p>
+          <h2 className="text-4xl md:text-5xl font-extrabold text-white">Soluções fáceis para <br /> <span className="text-blue-400">logística complexa</span></h2>
+        </div>
 
-        {/* Services Grid */}
-        <motion.div
-          ref={ref}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-          variants={{
-            hidden: {},
-            visible: { transition: { staggerChildren: 0.1 } },
-          }}
-          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
-          {services.map(({ id, icon: Icon, title, description, highlight, color }) => {
-            const c = colorMap[color as keyof typeof colorMap];
-            return (
-              <motion.article
-                key={id}
-                id={`service-${id}`}
-                variants={{
-                  hidden: { opacity: 0, y: 40 },
-                  visible: {
-                    opacity: 1,
-                    y: 0,
-                    transition: { duration: 0.5, ease: "easeOut" },
-                  },
-                }}
-                className={`relative glass-card p-7 ${c.hoverBorder} transition-all duration-300 service-card group flex flex-col`}
-              >
-                {highlight && (
-                  <span className={`absolute top-5 right-5 text-xs font-bold px-2.5 py-1 rounded-full ${c.badge}`}>
-                    {highlight}
+        <div className="grid lg:grid-cols-3 gap-8">
+          {services.map((s, i) => (
+            <motion.div
+              key={s.id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.1 }}
+              className="group relative h-[450px] rounded-3xl overflow-hidden border border-white/10"
+            >
+              <img 
+                src={s.img} 
+                className="absolute inset-0 w-full h-full object-cover grayscale brightness-50 group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700" 
+                alt={s.title} 
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
+              
+              <div className="absolute inset-0 p-8 flex flex-col justify-end">
+                {s.highlight && (
+                  <span className="w-fit bg-amber-500 text-slate-900 text-[10px] font-black uppercase px-3 py-1 rounded-full mb-4">
+                    {s.highlight}
                   </span>
                 )}
-
-                <div
-                  className={`w-12 h-12 rounded-xl ${c.bg} border ${c.border} flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300`}
-                >
-                  <Icon className={`w-6 h-6 ${c.icon}`} aria-hidden="true" />
+                <div className="w-12 h-12 bg-white/10 backdrop-blur-xl rounded-2xl flex items-center justify-center mb-4 group-hover:bg-amber-500 group-hover:text-slate-900 transition-colors">
+                  <s.icon size={24} />
                 </div>
-
-                <h3 className="text-lg font-bold text-white mb-3 leading-snug">
-                  {title}
-                </h3>
-                <p className="text-slate-400 text-sm leading-relaxed flex-1">
-                  {description}
+                <h3 className="text-2xl font-bold text-white mb-2">{s.title}</h3>
+                <p className="text-slate-400 text-sm mb-6 group-hover:text-slate-200 transition-colors">
+                  {s.description}
                 </p>
-
-                <div className={`mt-5 flex items-center gap-1 text-xs font-semibold ${c.arrow} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}>
-                  Saiba mais
-                  <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
+                <div className="flex items-center gap-2 text-white font-bold cursor-pointer group/link">
+                  Saiba Mais <ArrowRight size={18} className="group-hover/link:translate-x-2 transition-transform" />
                 </div>
-              </motion.article>
-            );
-          })}
-        </motion.div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
 
-        {/* Bottom CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="mt-14 text-center"
-        >
-          <p className="text-slate-400 mb-6">
-            Precisa de um serviço personalizado?{" "}
-            <strong className="text-white">Fale com a nossa equipe.</strong>
-          </p>
-          <a href="#contato" id="services-cta" className="btn-primary">
-            Solicitar Orçamento Gratuito
-            <ArrowRight className="w-5 h-5" aria-hidden="true" />
-          </a>
-        </motion.div>
+        {/* Logo Wall / Types of business served */}
+        <div className="mt-24 pt-16 border-t border-white/5">
+          <p className="text-center text-slate-500 text-xs uppercase font-bold tracking-widest mb-10">Atendemos diversos setores em São Paulo</p>
+          <div className="flex flex-wrap justify-center gap-8 md:gap-16 opacity-40 grayscale hover:grayscale-0 transition-all duration-500">
+             <div className="flex items-center gap-2 text-white font-bold"><Zap size={20} /> TECNOLOGIA</div>
+             <div className="flex items-center gap-2 text-white font-bold"><ShoppingBag size={20} /> VAREJO</div>
+             <div className="flex items-center gap-2 text-white font-bold"><Building2 size={20} /> ADVOCACIA</div>
+             <div className="flex items-center gap-2 text-white font-bold"><Plane size={20} /> AVIAÇÃO</div>
+             <div className="flex items-center gap-2 text-white font-bold text-lg">E MAIS +</div>
+          </div>
+        </div>
       </div>
     </section>
   );
