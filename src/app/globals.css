@@ -1,0 +1,166 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", sans-serif;
+  --color-brand-blue: #1B4F72;
+  --color-brand-blue-light: #2E86C1;
+  --color-brand-blue-dark: #154360;
+  --color-brand-accent: #F39C12;
+  --color-brand-accent-dark: #D68910;
+  --color-surface: #0D1B2A;
+  --color-surface-card: #132338;
+  --color-text-muted: #7F8C8D;
+}
+
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: #0D1B2A;
+    color: #ECF0F1;
+    font-family: "Inter", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #0D1B2A;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #2E86C1;
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #F39C12;
+  }
+
+  ::selection {
+    background-color: #2E86C1;
+    color: #fff;
+  }
+}
+
+/* ─── Design Tokens ─── */
+
+.hero-gradient {
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(46, 134, 193, 0.15) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(243, 156, 18, 0.08) 0%, transparent 50%),
+    linear-gradient(135deg, #0D1B2A 0%, #132338 50%, #0D1B2A 100%);
+}
+
+.grid-pattern {
+  background-image:
+    linear-gradient(rgba(46, 134, 193, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(46, 134, 193, 0.05) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+.glass-card {
+  background-color: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 1rem;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #F59E0B;
+  color: #0F172A;
+  font-weight: 700;
+  padding: 0.875rem 1.75rem;
+  border-radius: 9999px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn-primary:hover {
+  background-color: #FCD34D;
+  transform: scale(1.05);
+  box-shadow: 0 10px 30px rgba(245, 158, 11, 0.3);
+}
+
+.btn-primary:focus-visible {
+  outline: 2px solid #FCD34D;
+  outline-offset: 3px;
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 2px solid #60A5FA;
+  color: #60A5FA;
+  font-weight: 700;
+  padding: 0.875rem 1.75rem;
+  border-radius: 9999px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  text-decoration: none;
+  background: transparent;
+}
+
+.btn-outline:hover {
+  background-color: #60A5FA;
+  color: #0F172A;
+  transform: scale(1.05);
+}
+
+.btn-outline:focus-visible {
+  outline: 2px solid #60A5FA;
+  outline-offset: 3px;
+}
+
+.section-title {
+  font-size: clamp(1.75rem, 4vw, 2.625rem);
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.15;
+}
+
+.section-subtitle {
+  font-size: 1.0625rem;
+  color: #94A3B8;
+  margin-top: 0.75rem;
+  max-width: 42rem;
+  line-height: 1.7;
+}
+
+.service-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-6px);
+}
+
+/* ─── Animations ─── */
+
+@keyframes ping-slow {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.15); opacity: 0.4; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+.float-anim {
+  animation: float 3s ease-in-out infinite;
+}
