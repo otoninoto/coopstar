@@ -43,6 +43,8 @@ const contactInfo = [
   },
 ];
 
+import { submitContactForm } from "@/app/actions";
+
 type FormStatus = "idle" | "submitting" | "success" | "error";
 
 export default function Contact() {
@@ -50,25 +52,22 @@ export default function Contact() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   const [formStatus, setFormStatus] = useState<FormStatus>("idle");
-  const [form, setForm] = useState({
-    nome: "",
-    email: "",
-    assunto: "",
-    mensagem: "",
-  });
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
+  const [errorMessage, setErrorMessage] = useState("");
+  
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setFormStatus("submitting");
-    // Simulação de envio — integrar com API de backend/email service
-    await new Promise((r) => setTimeout(r, 1500));
-    setFormStatus("success");
+    setErrorMessage("");
+
+    const formData = new FormData(e.currentTarget);
+    const result = await submitContactForm(formData);
+
+    if (result.success) {
+      setFormStatus("success");
+    } else {
+      setFormStatus("error");
+      setErrorMessage(result.message || "Erro ao enviar.");
+    }
   };
 
   return (
@@ -180,7 +179,6 @@ export default function Contact() {
                   <button
                     onClick={() => {
                       setFormStatus("idle");
-                      setForm({ nome: "", email: "", assunto: "", mensagem: "" });
                     }}
                     className="mt-8 btn-outline text-sm"
                   >
@@ -211,8 +209,6 @@ export default function Contact() {
                         type="text"
                         required
                         autoComplete="name"
-                        value={form.nome}
-                        onChange={handleChange}
                         placeholder="Seu nome completo"
                         className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-slate-600 text-sm focus:outline-none focus:border-blue-500/60 focus:bg-white/8 transition-all duration-200"
                       />
@@ -230,8 +226,6 @@ export default function Contact() {
                         type="email"
                         required
                         autoComplete="email"
-                        value={form.email}
-                        onChange={handleChange}
                         placeholder="seu@email.com"
                         className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-slate-600 text-sm focus:outline-none focus:border-blue-500/60 focus:bg-white/8 transition-all duration-200"
                       />
@@ -250,8 +244,6 @@ export default function Contact() {
                       name="assunto"
                       type="text"
                       required
-                      value={form.assunto}
-                      onChange={handleChange}
                       placeholder="Ex: Solicitar motoboy, orçamento delivery..."
                       className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-slate-600 text-sm focus:outline-none focus:border-blue-500/60 focus:bg-white/8 transition-all duration-200"
                     />
@@ -269,8 +261,6 @@ export default function Contact() {
                       name="mensagem"
                       required
                       rows={5}
-                      value={form.mensagem}
-                      onChange={handleChange}
                       placeholder="Descreva sua necessidade de entrega ou serviço..."
                       className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-slate-600 text-sm focus:outline-none focus:border-blue-500/60 focus:bg-white/8 transition-all duration-200 resize-none"
                     />

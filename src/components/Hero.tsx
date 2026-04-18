@@ -19,14 +19,25 @@ export default function Hero() {
     if (el) el.scrollIntoView({ behavior: "smooth" });
   };
 
-  const simulateTracking = (e: React.FormEvent) => {
+  const simulateTracking = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!trackingCode) return;
     setIsSearching(true);
-    setTimeout(() => {
+    
+    try {
+      const response = await fetch(`/api/tracking/${trackingCode}`);
+      const result = await response.json();
+      
+      if (result.success) {
+        alert(`Status: ${result.data.status}\nLocal: ${result.data.location}\nMotorista: ${result.data.driver}`);
+      } else {
+        alert(result.message || "Erro ao buscar rastreio.");
+      }
+    } catch (error) {
+      alert("Ocorreu um erro ao conectar com o servidor.");
+    } finally {
       setIsSearching(false);
-      alert("Simulação: Encomenda em rota de entrega!");
-    }, 1500);
+    }
   };
 
   return (
