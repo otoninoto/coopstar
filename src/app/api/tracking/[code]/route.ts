@@ -24,9 +24,9 @@ const ordersDatabase = {
 
 export async function GET(
   request: Request,
-  { params }: { params: { code: string } }
+  context: { params: { code: string } | Promise<{ code: string }> }
 ) {
-  const { code } = params;
+  const { code } = await context.params;
   
   // Simular delay do banco de dados
   await new Promise((resolve) => setTimeout(resolve, 800));
