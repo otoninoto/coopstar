@@ -20,7 +20,7 @@ const services = [
     description:
       "Documentos e pequenos volumes entregues com prioridade máxima. Ideal para cartórios e urgências.",
     highlight: "Mais pedido",
-    img: "https://images.unsplash.com/photo-1619441163451-309193158f33?q=80&w=2072&auto=format&fit=crop",
+    img: "https://images.unsplash.com/photo-1518550687729-8444f0b2ee15?q=80&w=2070&auto=format&fit=crop",
   },
   {
     id: "delivery",
@@ -28,7 +28,7 @@ const services = [
     title: "Delivery E-commerce",
     description:
       "Sua loja online com entrega no mesmo dia. Logística preparada para grandes volumes diários.",
-    img: "https://images.unsplash.com/photo-1595246140625-573b715d11dc?q=80&w=2070&auto=format&fit=crop",
+    img: "https://images.unsplash.com/photo-1586769852836-bc069f19e1b6?q=80&w=2070&auto=format&fit=crop",
   },
   {
     id: "servicos-banc",
@@ -36,7 +36,7 @@ const services = [
     title: "Serviços Bancários",
     description:
       "Confiança total para pagamentos, depósitos e protocolos em toda a rede bancária de SP.",
-    img: "https://images.unsplash.com/photo-1556742049-3ad74acb99de?q=80&w=1974&auto=format&fit=crop",
+    img: "https://images.unsplash.com/photo-1454165205744-3b78555e5572?q=80&w=2070&auto=format&fit=crop",
   },
 ];
 
