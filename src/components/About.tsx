@@ -47,7 +47,7 @@ export default function About() {
             
             <div className="relative glass-card rounded-3xl overflow-hidden border-white/10 aspect-square md:aspect-video lg:aspect-square">
                <img 
-                src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=2084&auto=format&fit=crop" 
+                src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071&auto=format&fit=crop" 
                 alt="Equipe Coopstar Express em escritório moderno" 
                 className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
                />

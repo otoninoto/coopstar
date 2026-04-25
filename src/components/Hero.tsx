@@ -49,7 +49,7 @@ export default function Hero() {
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <img 
-          src="https://images.unsplash.com/photo-1582298538104-fe2e04f63873?q=80&w=2070&auto=format&fit=crop" 
+          src="https://images.unsplash.com/photo-1551698618-1ffafe5d638f?q=80&w=2070&auto=format&fit=crop" 
           alt="Motoboy em movimento em São Paulo" 
           className="w-full h-full object-cover opacity-20 grayscale brightness-50"
         />
