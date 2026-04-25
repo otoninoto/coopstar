@@ -49,8 +49,8 @@ export default function Hero() {
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <img 
-          src="https://images.unsplash.com/photo-1558981403-c5f91cbba527?q=80&w=2070&auto=format&fit=crop" 
-          alt="Moto em alta velocidade em São Paulo" 
+          src="https://images.unsplash.com/photo-1582298538104-fe2e04f63873?q=80&w=2070&auto=format&fit=crop" 
+          alt="Motoboy em movimento em São Paulo" 
           className="w-full h-full object-cover opacity-20 grayscale brightness-50"
         />
         <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-[2px]"></div>
