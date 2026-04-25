@@ -83,7 +83,7 @@ function FAQItem({ item, index }: { item: (typeof faqs)[0]; index: number }) {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
+            transition={{ duration: 0.3, ease: "easeInOut" as any }}
             className="overflow-hidden"
           >
             <div className="px-6 pb-5">

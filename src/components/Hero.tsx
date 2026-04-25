@@ -160,7 +160,7 @@ export default function Hero() {
                 {isSearching ? (
                   <motion.div 
                     animate={{ rotate: 360 }} 
-                    transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
+                    transition={{ repeat: Infinity, duration: 1, ease: "linear" as any }}
                   >
                     <Search size={20} />
                   </motion.div>

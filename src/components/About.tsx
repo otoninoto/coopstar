@@ -20,7 +20,7 @@ const containerVariants = {
 
 const itemVariants = {
   hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" as any } },
 };
 
 export default function About() {
@@ -68,7 +68,7 @@ export default function About() {
             {/* Experience Stats Card Overlay */}
             <motion.div 
                animate={{ y: [0, -10, 0] }}
-               transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+               transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" as any }}
                className="absolute -top-10 -right-6 hidden xl:flex glass-card p-6 border-blue-500/30 shadow-2xl items-center gap-5"
             >
                <div className="text-right">

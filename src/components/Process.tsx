@@ -101,7 +101,7 @@ export default function Process() {
                   opacity: 1,
                   y: 0,
                   scale: 1,
-                  transition: { duration: 0.5, ease: "easeOut" },
+                  transition: { duration: 0.5, ease: "easeOut" as any },
                 },
               }}
               className="relative glass-card p-7 group hover:border-white/20 transition-all duration-300"
